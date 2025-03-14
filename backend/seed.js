@@ -5,7 +5,7 @@ import { faker } from "@faker-js/faker";
 
 dotenv.config(); // Load environment variables
 
-const mongoURI = "mongodb+srv://mukuldata2000:musiclibrary@cluster0.wc804.mongodb.net/ecommerce_app_db";
+const mongoURI =process.env.MONGO_URI;
 
 const seedProducts = async () => {
   try {

@@ -12,3 +12,5 @@ frontend/build/
 frontend/dist/
 backend/logs/
 backend/uploads/
+
+backend/src/utils/seed.js

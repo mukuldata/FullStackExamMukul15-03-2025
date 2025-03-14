@@ -2,6 +2,7 @@
 import { useRouter, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { checkAuthentication ,logout} from "@/utils/api"; 
+import toast from "react-hot-toast";
 
 export default function Header() {
   const router = useRouter();
@@ -15,10 +16,14 @@ export default function Header() {
 
     setIsLoggedIn(true);
 
-    // Check if user is an admin via API call
     const fetchAdminStatus = async () => {
+      try {
       const {isAdmin:adminStatus} = await checkAuthentication();
       setIsAdmin(adminStatus);
+      }
+      catch (err:any) {
+        toast.error(err.response?.data?.message || "Error fetching admin status.");
+      }
     };
 
     fetchAdminStatus();

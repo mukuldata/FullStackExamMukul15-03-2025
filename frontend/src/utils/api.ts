@@ -191,7 +191,7 @@ export const fetchProductById = async (id: string) => {
       return response.data;
     } catch (error) {
       console.error("Error fetching top spenders:", error);
-      return null;
+      throw error;
     }
   };
 

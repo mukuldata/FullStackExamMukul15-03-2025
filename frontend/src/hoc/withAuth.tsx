@@ -13,7 +13,7 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
       const token = localStorage.getItem("authToken");
 
       if (!token) {
-        router.push("/login"); // Redirect if not authenticated
+        router.push("/login"); 
       } else {
         setLoading(false);
       }

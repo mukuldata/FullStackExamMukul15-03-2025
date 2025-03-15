@@ -16,7 +16,7 @@ Tech Stack :
 **Getting Started**
 
 
-1. Clone the repository: `git clone https://github.com/mukuldata/ecommerce-app`
+1. Clone the repository: `git clone https://github.com/mukuldata/FullStackExamMukul15-03-2025`
 2. cd backend 
 2. Install dependencies: `npm install`
 3. Create a `.env` file and add the following environment variables from .env.sample

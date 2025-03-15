@@ -23,7 +23,7 @@ export const checkout = async (req, res,next) => {
       const product = await Product.findById(item.productId.toString());
 
       if (!product) 
-        return nexxt(new ErrorHandler("Product not found", 404));
+        return next(new ErrorHandler("Product not found", 404));
 
       const itemTotal = product.price * item.quantity;
       totalAmount += itemTotal;
@@ -60,22 +60,54 @@ export const getOrderHistory = async (req, res,next) => {
     const { userId } = req.user;
 
     const orders = await Order.findAll({
-      where: { userId },
-      include: [{ model: OrderItem , as: "OrderItems" }],
-      order: [["createdAt", "DESC"]],
+      where: { userId }, 
+      include: [
+        {
+          model: OrderItem, as: "OrderItems",
+          attributes: ["productId", "quantity", "price"],
+        },
+      ],
     });
 
-    for (const order of orders) {
-      for (const item of order.OrderItems) {
-        const product = await Product.findById(item.productId).lean();
-        item.dataValues.product = product || null; 
-      }
+    if (orders.length === 0) {
+      return res.json({ success: true, message: "No orders found", orders: [] });
     }
+
+    
+    const productIds = [
+      ...new Set(orders.flatMap((order) => order.OrderItems.map((item) => item.productId))),
+    ];
+
+    
+    const products = await Product.find({ _id: { $in: productIds } });
+
+   
+    const productMap = {};
+    products.forEach((product) => {
+      productMap[product._id] = {
+        name: product.name,
+        category: product.category,
+      };
+    });
+
+
+    const groupedOrders = orders.map((order) => ({
+      orderId: order.id,
+      createdAt: order.createdAt,
+      status: order.status,
+      totalPrice: order.totalAmount, 
+      items: order.OrderItems.map((item) => ({
+        productName: productMap[item.productId]?.name || "Unknown Product",
+        category: productMap[item.productId]?.category || "Unknown Category",
+        quantity: item.quantity,
+        price: item.price *item.quantity, 
+      })),
+    }));
 
     res.status(200).json({
       success: true,
       message: "Order history fetched successfully",
-      orders,
+      orders:groupedOrders,
     });
   } catch (error) {
     next(error);

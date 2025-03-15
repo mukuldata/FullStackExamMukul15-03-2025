@@ -87,11 +87,11 @@ function CartPage() {
     }
   };
 
-  if (loading) return <Loader />;
 
   return (
     <>
       <Header />
+      {loading && <Loader />}
       <div className="flex flex-col md:flex-row gap-6 p-6">
         {/* Cart Items */}
         <div className="w-full md:w-2/3 bg-white shadow-lg rounded-lg p-4">

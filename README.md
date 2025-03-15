@@ -2,7 +2,7 @@
 
 **README**
 
-** ECOMMERCE APP: FullStackExamMukul15-03-2025
+**ECOMMERCE APP**: FullStackExamMukul15-03-2025
 
 **Project Overview**
 

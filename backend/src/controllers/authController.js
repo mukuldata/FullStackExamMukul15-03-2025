@@ -2,10 +2,9 @@ import User from "../models/sql/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import ErrorHandler from "../utils/helpers.js";
-import { ne } from "@faker-js/faker";
 
 const cookieOptions = {
-  maxAge: 15 * 24 * 60 * 60 * 1000,
+  maxAge: process.env.COOKIE_EXPIRE,
   sameSite: "none",
   httpOnly: true,
   secure: true,

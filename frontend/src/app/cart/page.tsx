@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { fetchCart, checkout, removeFromCartApi } from "@/utils/api"; // Import removeCart API
+import { fetchCart, checkout, removeFromCartApi } from "@/utils/api"; 
 import withAuth from "@/hoc/withAuth";
 import Loader from "@/components/Loader";
 import Header from "@/components/Header";
-import { FaTrash } from "react-icons/fa"; // Import Trash Icon
+import { FaTrash } from "react-icons/fa"; 
 import toast from "react-hot-toast";
 
 export interface CartItem {
@@ -68,12 +68,10 @@ function CartPage() {
     }
   };
 
-  // Function to Remove Item from Cart
   const handleRemoveItem = async (productId: string) => {
     try {
       const response = await removeFromCartApi(productId); 
       if (response.success) {
-        // Update State by Filtering Out the Removed Item
         setCartData((prev) =>
           prev ? { ...prev, cart: prev.cart.filter((item) => item.productId !== productId) } : prev
         );

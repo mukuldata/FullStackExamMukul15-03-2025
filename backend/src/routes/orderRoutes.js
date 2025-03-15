@@ -4,7 +4,7 @@ import { authenticateUser } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.use(authenticateUser); // Protect all routes in this file
+router.use(authenticateUser); 
 
 router.post("/checkout", checkout);
 router.get("/history", getOrderHistory);

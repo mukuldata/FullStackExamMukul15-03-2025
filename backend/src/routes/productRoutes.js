@@ -7,9 +7,9 @@ const router = express.Router();
 router.use(authenticateUser);
 
 
-router.get("/", getProducts); // List/Search Products
-router.get("/categories", getCategories); // Get all categories
-router.get("/:id", getProductById); // Get Product by ID
+router.get("/", getProducts); 
+router.get("/categories", getCategories); 
+router.get("/:id", getProductById); 
 
 
 export default router;

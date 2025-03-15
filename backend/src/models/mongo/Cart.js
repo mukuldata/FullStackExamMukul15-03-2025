@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const cartSchema = new mongoose.Schema({
-  userId: { type: String, required: true }, // Links to SQL User model
+  userId: { type: String, required: true }, 
   items: [
     {
       productId: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },

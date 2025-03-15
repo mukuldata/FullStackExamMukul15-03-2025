@@ -4,11 +4,11 @@ import {authenticateUser} from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-router.use(authenticateUser); // Protect all routes in this file
+router.use(authenticateUser);
 
-router.get("/view", viewCart); // View cart
-router.post("/add", addItemToCart); // Add item to cart
-router.post("/remove", removeItemFromCart); // Remove item from cart
+router.get("/view", viewCart);
+router.post("/add", addItemToCart); 
+router.post("/remove", removeItemFromCart); 
 
 
 export default router;

@@ -37,14 +37,28 @@ type CategoryResponse = {
 
   const limit = 9;
 
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCategory(e.target.value);
+    setPage(1); // Reset to page 1
+  };
+  
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+    setPage(1); 
+  };
+
 
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const data: ProductResponse = await fetchProducts(page, category, search);
-        setProducts(data.products);
-        setTotal(data.total);
+        if (data.total > 0 && page > Math.ceil(data.total / limit)) {
+          setPage(1);
+        } else {
+          setProducts(data.products);
+          setTotal(data.total);
+        }
       } catch (error) {
         toast.error("Failed to load products" , {duration: 4000});
         console.error("Failed to load products");
@@ -83,12 +97,12 @@ type CategoryResponse = {
           type="text"
           placeholder="Search products..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={handleSearchChange}
           className="border p-2 rounded-md w-1/2"
         />
         <select
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={handleCategoryChange}
           className="border p-2 rounded-md"
         >
           <option value="">All Categories</option>

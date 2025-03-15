@@ -2,11 +2,13 @@
 
 **README**
 
+** ECOMMERCE APP: FullStackExamMukul15-03-2025
+
 **Project Overview**
 
 Tech Stack : 
 * Frontend : Next JS 
-* Backend : Node , Express , MongoDB ,POSTGRES, 
+* Backend : Node , Express , MongoDB ,POSTGRES
 
 **Deployed on** : 
 * Frontend : https://ecommerce-app-7y4r.vercel.app/
